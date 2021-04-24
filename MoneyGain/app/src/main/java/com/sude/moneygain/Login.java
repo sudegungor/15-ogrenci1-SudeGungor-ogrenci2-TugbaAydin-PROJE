@@ -16,12 +16,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class Login extends AppCompatActivity {
 
-    Button signUp;
+    DatabaseHelper db;
+
+    Button signUp,button_giris;
     ImageView image;
-    TextView logoText;
-    TextView sloganText;
-    TextInputLayout username;
-    TextInputLayout password;
+    TextView logoText,sloganText;
+    TextInputLayout username,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,14 @@ public class Login extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
+        db = new DatabaseHelper(this);
+
         signUp = findViewById(R.id.signup_button);
+        button_giris = findViewById(R.id.button_giris);
         image = findViewById(R.id.logo_image);
         logoText = findViewById(R.id.logo_name);
         sloganText = findViewById(R.id.slogan_name);
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.text_surname);
         password = findViewById(R.id.password);
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +57,36 @@ public class Login extends AppCompatActivity {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this, pairs);
                     startActivity(intent,options.toBundle());
                 }
+            }
+        });
+
+
+        button_giris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nick = username.getEditText().getText().toString();
+                String pass = password.getEditText().getText().toString();
+
+                if(nick!=null && pass!= null){
+
+                    Boolean checkUserEmail = db.checkUserEmail(nick, pass);
+                    Boolean checkUserNick = db.checkUserNick(nick, pass);
+                    System.out.println(checkUserEmail);
+                    System.out.println(checkUserNick);
+
+                    if(checkUserEmail == true || checkUserNick == true){
+
+                        Intent intent = new Intent(Login.this, IlkEkran.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        System.out.println("BUTONA BASTIN4");
+                    }
+                }
+
+
+
+
             }
         });
 
