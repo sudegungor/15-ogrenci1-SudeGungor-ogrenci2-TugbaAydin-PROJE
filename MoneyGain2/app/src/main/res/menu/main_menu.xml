@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:title="ANASAYFA"
+            android:icon="@drawable/menu_beyaz"/>
+
+        <item
+            android:id="@+id/nav_butunKategoriler"
+            android:title="BÜTÜN KATEGORİLER"
+            android:icon="@drawable/category"/>
+
+    </group>
+
+
+    <item android:title="Profile">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="PROFİL"
+                    android:icon="@drawable/person"/>
+
+
+            </group>
+
+
+        </menu>
+
+
+    </item>
+
+    <item android:title="Kategoriler">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_Et"
+                    android:title="Et, Tavuk, Balık"
+                    android:icon="@drawable/meat"/>
+
+                <item
+                    android:id="@+id/nav_Sut"
+                    android:title="Süt, Kahvaltılık"
+                    android:icon="@drawable/milk"/>
+
+                <item
+                    android:id="@+id/nav_Gida"
+                    android:title="Gıda, Şekerleme"
+                    android:icon="@drawable/candy"/>
+
+                <item
+                    android:id="@+id/nav_Icecek"
+                    android:title="İçecek"
+                    android:icon="@drawable/drink"/>
+
+                <item
+                    android:id="@+id/nav_Temizlik"
+                    android:title="Deterjan, Temizlik"
+                    android:icon="@drawable/cleaning"/>
+
+                <item
+                    android:id="@+id/nav_Bebek"
+                    android:title="Bebek, Oyuncak"
+                    android:icon="@drawable/baby"/>
+
+            </group>
+
+
+        </menu>
+
+
+    </item>
+
+
+    <item android:title="Share">
+
+        <menu>
+
+            <group android:checkableBehavior="none">
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="LOGOUT"
+                    android:icon="@drawable/logout"/>
+
+
+            </group>
+
+
+        </menu>
+
+
+    </item>
+
+</menu>
