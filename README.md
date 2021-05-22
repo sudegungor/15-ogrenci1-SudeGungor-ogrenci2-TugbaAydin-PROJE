@@ -6,7 +6,7 @@ Android Studio ile Market Fiyatları Karşılaştırma
 MONEY GAIN GİRİŞ
 
 
-![image](https://user-images.githubusercontent.com/53115743/115777204-a8bc6f00-a3bd-11eb-8703-fcf66a7dc1d0.png)
+![image](https://user-images.githubusercontent.com/53115743/119226470-f25dbe00-bb11-11eb-9bec-cf54f9b8e812.png)
 
 
 
