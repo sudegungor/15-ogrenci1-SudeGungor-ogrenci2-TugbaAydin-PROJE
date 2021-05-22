@@ -13,4 +13,4 @@ MONEY GAIN GİRİŞ
 KULLANICI GİRİŞİ
 
 
-![image](https://user-images.githubusercontent.com/53115743/115777283-bffb5c80-a3bd-11eb-8a04-4868d7c3fcac.png)
+![image](https://user-images.githubusercontent.com/53115743/119226464-e2de7500-bb11-11eb-84c6-8697819f663c.png)
