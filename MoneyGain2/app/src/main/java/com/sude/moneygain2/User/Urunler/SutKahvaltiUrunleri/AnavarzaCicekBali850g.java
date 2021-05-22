@@ -82,6 +82,7 @@ public class AnavarzaCicekBali850g extends Activity {
 
             String deger = liste1.get(i);
             deger = deger.replaceAll(",", ".");
+            deger = deger.replaceAll(" ", "");
             liste_float.add(Float.parseFloat(deger));
 
         }
@@ -170,6 +171,11 @@ public class AnavarzaCicekBali850g extends Activity {
                 Document doc = Jsoup.connect(URL2).timeout(30*1000).get();
 
                 Elements fiyat = doc.select("div[class='price single']");
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='price new']");
+                }
+
                 liste_fiyat.add(fiyat.text());
 
                 liste_isim.add("Anavarza Çiçek Balı 850 g || A101");
@@ -217,6 +223,11 @@ public class AnavarzaCicekBali850g extends Activity {
                 Document doc = Jsoup.connect(URL3).timeout(30*1000).get();
 
                 Elements fiyat = doc.select("span[itemprop='price']");
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='item-price js-variant-discounted-price']");
+                }
+
                 liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length()-3));
 
                 liste_isim.add("Anavarza Çiçek Balı 850 g || CarrefourSA");

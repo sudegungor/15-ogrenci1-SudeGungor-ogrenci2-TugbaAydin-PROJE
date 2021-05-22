@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -34,7 +33,6 @@ import com.sude.moneygain2.R;
 import com.sude.moneygain2.Adapter.RecMarketlerAdapter;
 import com.sude.moneygain2.User.Kategoriler.BebekOyuncak;
 import com.sude.moneygain2.User.Kategoriler.Deterjan;
-import com.sude.moneygain2.User.Kategoriler.EtTavukBalik;
 import com.sude.moneygain2.User.Kategoriler.GidaSekerleme;
 import com.sude.moneygain2.User.Kategoriler.Icecek;
 import com.sude.moneygain2.User.Kategoriler.SutKahvalti;
@@ -53,8 +51,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     TextView kategori_hepsinigoruntule;
     ImageView menuIcon;
 
-    LinearLayout contentView, biz_kimiz;
-    RelativeLayout profilim_relativeLayout;
+    LinearLayout contentView, profilim_linearLayout, biz_kimiz, kuponlar_linearLayout;
     RecyclerView rec_marketler, enCokGoruntulenenleRecycler, kategorileRecycler, search_recycler;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -71,7 +68,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.activity_dashboard);
 
 
-        //Inten ile verileri aldık
+        //Intent ile verileri aldık
         Intent intent1 = getIntent();
         username_email = intent1.getStringExtra("username_email");
         pass = intent1.getStringExtra("pass");
@@ -87,12 +84,24 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
         search_edit_text = findViewById(R.id.search_edit_text);
-        profilim_relativeLayout = findViewById(R.id.profilim_relativeLayout);
+        profilim_linearLayout = findViewById(R.id.profilim_linearLayout);
         biz_kimiz = findViewById(R.id.biz_kimiz);
+        kuponlar_linearLayout = findViewById(R.id.kuponlar_linearLayout);
 
 
 
         db = new DatabaseHelper(this);
+
+
+        kuponlar_linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Kuponlar.class);
+                intent.putExtra("username_email", username_email);
+                intent.putExtra("pass", pass);
+                startActivity(intent);
+            }
+        });
 
 
         biz_kimiz.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +112,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        profilim_relativeLayout.setOnClickListener(new View.OnClickListener() {
+        profilim_linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -267,13 +276,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(intent4);
                 break;
 
-            case R.id.nav_Et:
-
-                Intent intent5 = new Intent(getApplicationContext(), EtTavukBalik.class);
-                intent5.putExtra("username_email", username_email);
-                intent5.putExtra("pass", pass);
-                startActivity(intent5);
-                break;
 
             case R.id.nav_Sut:
 
@@ -336,7 +338,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
 
         ArrayList<CategoriesHelperClass> categoriesHelperClass = new ArrayList<>();
-        categoriesHelperClass.add(new CategoriesHelperClass(gradient1, R.drawable.meat, "Et, Tavuk, Balık", username_email, pass));
         categoriesHelperClass.add(new CategoriesHelperClass(gradient2, R.drawable.milk, "Süt, Kahvaltılık", username_email, pass));
         categoriesHelperClass.add(new CategoriesHelperClass(gradient3, R.drawable.candy, "Gıda, Şekerleme", username_email, pass));
         categoriesHelperClass.add(new CategoriesHelperClass(gradient4, R.drawable.drink, "         İçecek", username_email, pass));
@@ -359,7 +360,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         enCokGoruntulenenleRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ArrayList<RecUrunlerHelperClasses> mostViewedLocations = new ArrayList<>();
-        mostViewedLocations.add(new RecUrunlerHelperClasses(R.drawable.cola_2_5, "Coca Cola 2,5L", R.drawable.yudum_aycicek_2l, "Yudum Ayçiçek Yağı 2L"));
+        mostViewedLocations.add(new RecUrunlerHelperClasses(R.drawable.cola_2_5, "Coca Cola 2,5L", R.drawable.eti_lifalif_yulaf_ezmesi_500g, "Eti Lifalif Yulaf Ezmesi 500 g"));
+        mostViewedLocations.add(new RecUrunlerHelperClasses(R.drawable.nescafe_3u1_arada_sade, "Nescafe 3ü1 Arada Sade", R.drawable.marmara_birlik_kuru_sele_zeytin_400_g, "Marmara Birlik Kuru Sele Zeytin 400 g Pet"));
 
         rec_adapter = new RecUrunlerAdapter(mostViewedLocations);
         enCokGoruntulenenleRecycler.setAdapter(rec_adapter);

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.sude.moneygain2.R;
 import com.sude.moneygain2.User.DetayliEkran;
+import com.sude.moneygain2.User.Urunler.IcecekUrunleri.CocaCola2_5L;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,9 +42,9 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
     public static ArrayList<Float> liste_float = new ArrayList();
 
     private ProgressDialog progressDialog;
-    private static String URL1 ="https://www.happycenter.com.tr/Coca_Cola_2_5_Lt_Pet";
-    private static String URL2 ="https://www.a101.com.tr/market/coca-cola-gazli-icecek-sekersiz-2-5-l/";
-    private static String URL3 ="https://www.carrefoursa.com/coca-cola-2-5-l-p-30039137";
+    private static String URL1 ="https://www.happycenter.com.tr/M_birlik_400_Gr_Kuru_Sele_Plastik_Kutu_Zeytin";
+    private static String URL2 ="https://www.a101.com.tr/market/marmarabirlik-siyah-zeytin-kuru-sele-xs-400-g/";
+    private static String URL3 ="https://www.carrefoursa.com/marmara-birlik-kuru-sele-zeytin-400-g-pet-p-30171912";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,8 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
     }
 
 
-    public static void karsilastir(ArrayList<String> liste1, ArrayList<String> liste2){
+    public static void karsilastir(ArrayList<String> liste1, ArrayList<String> liste2) {
+
 
 
 
@@ -87,13 +89,14 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
 
             String deger = liste1.get(i);
             deger = deger.replaceAll(",", ".");
+            deger = deger.replaceAll(" ", "");
             liste_float.add(Float.parseFloat(deger));
 
         }
 
+
         float en_kucuk = liste_float.get(0);
         String en_kucuk_isim = liste2.get(0);
-
 
         for (int i = 1; i < liste_float.size(); i++) {
             if (en_kucuk > liste_float.get(i)) {
@@ -107,13 +110,13 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
         textView_fiyat.setText("En Uygun Fiyat: " + String.valueOf(en_kucuk) + " TL");
         textView_isim.setText(en_kucuk_isim);
 
-        if(textView_isim.getText().equals("Marmara Birlik Kuru Sele Zeytin 400 g || HappyCenter"))
+        if (textView_isim.getText().equals("Marmara Birlik Kuru Sele Zeytin 400 g || HappyCenter"))
             market_logo.setImageResource(R.drawable.happycenter_pic);
 
-        else if(textView_isim.getText().equals("Marmara Birlik Kuru Sele Zeytin 400 g || A101"))
+        else if (textView_isim.getText().equals("Marmara Birlik Kuru Sele Zeytin 400 g || A101"))
             market_logo.setImageResource(R.drawable.a101_pic);
 
-        else if(textView_isim.getText().equals("Marmara Birlik Kuru Sele Zeytin 400 g || CarrefourSA"))
+        else if (textView_isim.getText().equals("Marmara Birlik Kuru Sele Zeytin 400 g || CarrefourSA"))
             market_logo.setImageResource(R.drawable.carrefour_pic);
 
     }
@@ -158,7 +161,7 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
     }
 
 
-    private class A101VeriGetir extends AsyncTask<Void, Void, Void>{
+    private class A101VeriGetir extends AsyncTask<Void, Void, Void> {
 
 
         @Override
@@ -167,19 +170,19 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
         }
 
 
-
         @Override
         protected Void doInBackground(Void... voids) {
 
             try {
-                Document doc = Jsoup.connect(URL2).timeout(30*1000).get();
+                Document doc = Jsoup.connect(URL2).timeout(30 * 1000).get();
 
                 Elements fiyat = doc.select("div[class='price single']");
-                double fiyat2 = Double.parseDouble(fiyat.text()) / 2;
-                liste_fiyat.add(fiyat2);
 
-                System.out.println("zeytiiiiiiiiiiiiiiiiiiiiiiiiin"+liste_fiyat);
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='price new']");
+                }
 
+                liste_fiyat.add(fiyat.text());
                 liste_isim.add("Marmara Birlik Kuru Sele Zeytin 400 g || A101");
 
 
@@ -225,6 +228,10 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
                 Document doc = Jsoup.connect(URL3).timeout(30*1000).get();
 
                 Elements fiyat = doc.select("span[itemprop='price']");
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='item-price js-variant-discounted-price']");
+                }
                 liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length()-3));
 
                 liste_isim.add("Marmara Birlik Kuru Sele Zeytin 400 g || CarrefourSA");
@@ -232,6 +239,7 @@ public class MarmaraBirlikKuruSeleZeytin400g extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
 
             return null;

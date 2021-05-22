@@ -1,37 +1,33 @@
-package com.sude.moneygain2.User.Kategoriler;
+package com.sude.moneygain2.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.sude.moneygain2.Model.RecUrunlerHelperClasses;
+import com.sude.moneygain2.Database.DatabaseHelper;
 import com.sude.moneygain2.R;
-import com.sude.moneygain2.Adapter.RecUrunlerAdapter;
-import com.sude.moneygain2.User.ButunKategoriler;
-import com.sude.moneygain2.User.Dashboard;
-import com.sude.moneygain2.User.Login;
-import com.sude.moneygain2.User.Profil;
+import com.sude.moneygain2.User.Kategoriler.BebekOyuncak;
+import com.sude.moneygain2.User.Kategoriler.Deterjan;
+import com.sude.moneygain2.User.Kategoriler.GidaSekerleme;
+import com.sude.moneygain2.User.Kategoriler.Icecek;
+import com.sude.moneygain2.User.Kategoriler.SutKahvalti;
 
 import java.util.ArrayList;
 
-public class EtTavukBalik extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final float END_SCALE = 0.7f;
-
-    RecyclerView rec_urunler1;
-    RecyclerView.Adapter adapter;
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -39,38 +35,66 @@ public class EtTavukBalik extends AppCompatActivity implements NavigationView.On
     LinearLayout contentView;
     String username_email, pass;
 
+    DatabaseHelper db;
+
+    EditText text_kupon;
+
+    ArrayList<String> kupon_arrayList ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_et_tavuk_balik);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_kuponlar);
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
+        text_kupon = findViewById(R.id.text_kupon);
 
-        Intent intent8 = getIntent();
-        username_email = intent8.getStringExtra("username_email");
-        pass = intent8.getStringExtra("pass");
-
-        rec_urunler1 = findViewById(R.id.rec_urunler1);
-        rec_urunler1();
         navigationDrawer();
 
+
+        //**********************************************************************//
+
+
+        db = new DatabaseHelper(this);
+
+        Intent intent = getIntent();
+        username_email = intent.getStringExtra("username_email");
+        pass = intent.getStringExtra("pass");
+
+
+        kupon_arrayList = new ArrayList();
+
+        kupon_arrayList = db.getKupon(username_email, pass);
+
+
+
+
+        for (int i = 0; i < kupon_arrayList.size(); i++) {
+
+            text_kupon.append(kupon_arrayList.get(i));
+
+        }
+
+
     }
+
 
     private void navigationDrawer() {
 
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_Et);
+        navigationView.setCheckedItem(R.id.nav_profile);
 
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(drawerLayout.isDrawerVisible(GravityCompat.START))
+                if (drawerLayout.isDrawerVisible(GravityCompat.START))
                     drawerLayout.closeDrawer(GravityCompat.START);
 
                 else
@@ -94,13 +118,13 @@ public class EtTavukBalik extends AppCompatActivity implements NavigationView.On
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
                 final float diffScaledOffset = slideOffset * (1 - END_SCALE);
-                final float offsetScale = 1- diffScaledOffset;
+                final float offsetScale = 1 - diffScaledOffset;
 
                 contentView.setScaleX(offsetScale);
                 contentView.setScaleY(offsetScale);
 
                 final float xOffset = drawerView.getWidth() * slideOffset;
-                final float xOffsetDiff = contentView.getWidth() * diffScaledOffset /2 ;
+                final float xOffsetDiff = contentView.getWidth() * diffScaledOffset / 2;
                 final float xTranslation = xOffset - xOffsetDiff;
                 contentView.setTranslationX(xTranslation);
 
@@ -126,10 +150,9 @@ public class EtTavukBalik extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if(drawerLayout.isDrawerVisible(GravityCompat.START)){
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else
+        } else
             super.onBackPressed();
     }
 
@@ -137,7 +160,7 @@ public class EtTavukBalik extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.nav_home:
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
@@ -169,13 +192,7 @@ public class EtTavukBalik extends AppCompatActivity implements NavigationView.On
                 startActivity(intent4);
                 break;
 
-            case R.id.nav_Et:
 
-                Intent intent5 = new Intent(getApplicationContext(), EtTavukBalik.class);
-                intent5.putExtra("username_email", username_email);
-                intent5.putExtra("pass", pass);
-                startActivity(intent5);
-                break;
 
             case R.id.nav_Sut:
 
@@ -225,25 +242,4 @@ public class EtTavukBalik extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
-
-
-    private void rec_urunler1(){
-
-        rec_urunler1.setHasFixedSize(true);
-        rec_urunler1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
-
-        ArrayList<RecUrunlerHelperClasses> recUrunlerHelperClasses = new ArrayList<>();
-
-        recUrunlerHelperClasses.add(new RecUrunlerHelperClasses(R.drawable.cola_2_5, "ET1", R.drawable.yudum_aycicek_2l, "ET2"));
-        recUrunlerHelperClasses.add(new RecUrunlerHelperClasses(R.drawable.happycenter_pic, "ET3", R.drawable.cola_2_5, "ET4"));
-        recUrunlerHelperClasses.add(new RecUrunlerHelperClasses(R.drawable.yudum_aycicek_2l, "ET5", R.drawable.happycenter_pic, "ET6"));
-
-
-        adapter = new RecUrunlerAdapter(recUrunlerHelperClasses);
-
-        rec_urunler1.setAdapter(adapter);
-
-    }
-
-
 }

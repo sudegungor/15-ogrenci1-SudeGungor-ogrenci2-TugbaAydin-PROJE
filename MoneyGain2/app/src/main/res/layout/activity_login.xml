@@ -80,22 +80,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:textColor="#000"
-            android:text="Şifremi Unuttum"
-            android:textSize="12sp"
-            android:layout_gravity="right"
-            android:elevation="0dp"
-            android:layout_margin="5dp"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_giris"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/yuvarlak_button"
             android:elevation="0dp"
@@ -115,21 +104,6 @@
             android:elevation="0dp"
             android:layout_margin="5dp"
             android:transitionName="loginsignup_tran"/>
-
-
-        <Button
-            android:id="@+id/button_google"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:textColor="#000"
-            android:text="Google"
-            android:textSize="12sp"
-            android:elevation="0dp"
-            android:layout_margin="5dp"
-            android:transitionName="loginsignup_tran"/>
-
-
 
 
     </LinearLayout>

@@ -15,7 +15,6 @@ import com.sude.moneygain2.Model.CategoriesHelperClass;
 import com.sude.moneygain2.R;
 import com.sude.moneygain2.User.Kategoriler.BebekOyuncak;
 import com.sude.moneygain2.User.Kategoriler.Deterjan;
-import com.sude.moneygain2.User.Kategoriler.EtTavukBalik;
 import com.sude.moneygain2.User.Kategoriler.GidaSekerleme;
 import com.sude.moneygain2.User.Kategoriler.Icecek;
 import com.sude.moneygain2.User.Kategoriler.SutKahvalti;
@@ -80,14 +79,9 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Adapte
                 @Override
                 public void onClick(View v) {
 
-                    if(textView.getText().equals("Et, Tavuk, Balık")){
-                        Intent intent = new Intent(v.getContext(), EtTavukBalik.class);
-                        intent.putExtra("username_email", username_email);
-                        intent.putExtra("pass", pass);
-                        v.getContext().startActivity(intent);
-                    }
 
-                    else if(textView.getText().equals("Süt, Kahvaltılık")){
+
+                    if(textView.getText().equals("Süt, Kahvaltılık")){
                         Intent intent = new Intent(v.getContext(), SutKahvalti.class);
                         intent.putExtra("username_email", username_email);
                         intent.putExtra("pass", pass);

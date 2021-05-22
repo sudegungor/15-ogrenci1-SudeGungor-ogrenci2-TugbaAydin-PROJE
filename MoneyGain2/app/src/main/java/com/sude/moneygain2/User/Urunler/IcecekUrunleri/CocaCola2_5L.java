@@ -39,14 +39,14 @@ public class CocaCola2_5L extends Activity {
     public static ArrayList<Float> liste_float = new ArrayList();
 
     private ProgressDialog progressDialog;
-    private static String URL1 ="https://www.happycenter.com.tr/Coca_Cola_2_5_Lt_Pet";
-    private static String URL2 ="https://www.a101.com.tr/market/coca-cola-gazli-icecek-sekersiz-2-5-l/";
-    private static String URL3 ="https://www.carrefoursa.com/coca-cola-2-5-l-p-30039137";
+    private static String URL1 = "https://www.happycenter.com.tr/Coca_Cola_2_5_Lt_Pet";
+    private static String URL2 = "https://www.a101.com.tr/market/coca-cola-gazli-icecek-sekersiz-2-5-l/";
+    private static String URL3 = "https://www.carrefoursa.com/coca-cola-2-5-l-p-30039137";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.urun_popup_dizayn);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -55,7 +55,7 @@ public class CocaCola2_5L extends Activity {
         int widht = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(widht*.8), (int)(height*.5));
+        getWindow().setLayout((int) (widht * .8), (int) (height * .5));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -77,20 +77,23 @@ public class CocaCola2_5L extends Activity {
     }
 
 
-    public static void karsilastir(ArrayList<String> liste1, ArrayList<String> liste2){
+    public static void karsilastir(ArrayList<String> liste1, ArrayList<String> liste2) {
 
 
-        for (int i = 0; i < liste1.size(); i++) {
+
+
+       for (int i = 0; i < liste1.size(); i++) {
 
             String deger = liste1.get(i);
             deger = deger.replaceAll(",", ".");
+            deger = deger.replaceAll(" ", "");
             liste_float.add(Float.parseFloat(deger));
 
         }
 
+
         float en_kucuk = liste_float.get(0);
         String en_kucuk_isim = liste2.get(0);
-
 
         for (int i = 1; i < liste_float.size(); i++) {
             if (en_kucuk > liste_float.get(i)) {
@@ -104,13 +107,13 @@ public class CocaCola2_5L extends Activity {
         textView_fiyat.setText("En Uygun Fiyat: " + String.valueOf(en_kucuk) + " TL");
         textView_isim.setText(en_kucuk_isim);
 
-        if(textView_isim.getText().equals("Coca Cola 2,5L || HappyCenter"))
+        if (textView_isim.getText().equals("Coca Cola 2,5L || HappyCenter"))
             market_logo.setImageResource(R.drawable.happycenter_pic);
 
-        else if(textView_isim.getText().equals("Coca Cola 2,5L || A101"))
+        else if (textView_isim.getText().equals("Coca Cola 2,5L || A101"))
             market_logo.setImageResource(R.drawable.a101_pic);
 
-        else if(textView_isim.getText().equals("Coca Cola 2,5L || CarrefourSA"))
+        else if (textView_isim.getText().equals("Coca Cola 2,5L || CarrefourSA"))
             market_logo.setImageResource(R.drawable.carrefour_pic);
 
     }
@@ -124,15 +127,14 @@ public class CocaCola2_5L extends Activity {
         }
 
 
-
         @Override
         protected Void doInBackground(Void... voids) {
 
             try {
-                Document doc = Jsoup.connect(URL1).timeout(30*1000).get();
+                Document doc = Jsoup.connect(URL1).timeout(30 * 1000).get();
 
                 Elements fiyat = doc.select("h2[id='fiyat']");
-                liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length()-1));
+                liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length() - 1));
 
                 liste_isim.add("Coca Cola 2,5L || HappyCenter");
 
@@ -155,7 +157,7 @@ public class CocaCola2_5L extends Activity {
     }
 
 
-    private class A101VeriGetir extends AsyncTask<Void, Void, Void>{
+    private class A101VeriGetir extends AsyncTask<Void, Void, Void> {
 
 
         @Override
@@ -164,16 +166,19 @@ public class CocaCola2_5L extends Activity {
         }
 
 
-
         @Override
         protected Void doInBackground(Void... voids) {
 
             try {
-                Document doc = Jsoup.connect(URL2).timeout(30*1000).get();
+                Document doc = Jsoup.connect(URL2).timeout(30 * 1000).get();
 
                 Elements fiyat = doc.select("div[class='price single']");
-                liste_fiyat.add(fiyat.text());
 
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='price new']");
+                }
+
+                liste_fiyat.add(fiyat.text());
                 liste_isim.add("Coca Cola 2,5L || A101");
 
 
@@ -196,7 +201,7 @@ public class CocaCola2_5L extends Activity {
     }
 
 
-    private class CarrefourVeriGetir extends AsyncTask<Void, Void, Void>{
+    private class CarrefourVeriGetir extends AsyncTask<Void, Void, Void> {
 
 
         @Override
@@ -210,16 +215,20 @@ public class CocaCola2_5L extends Activity {
         }
 
 
-
         @Override
         protected Void doInBackground(Void... voids) {
 
 
             try {
-                Document doc = Jsoup.connect(URL3).timeout(30*1000).get();
+                Document doc = Jsoup.connect(URL3).timeout(30 * 1000).get();
 
                 Elements fiyat = doc.select("span[itemprop='price']");
-                liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length()-3));
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='item-price js-variant-discounted-price']");
+                }
+
+                liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length() - 3));
 
                 liste_isim.add("Coca Cola 2,5L || CarrefourSA");
 
@@ -237,7 +246,7 @@ public class CocaCola2_5L extends Activity {
             super.onPostExecute(aVoid);
 
 
-            karsilastir(liste_fiyat,liste_isim);
+            karsilastir(liste_fiyat, liste_isim);
 
 
             progressDialog.dismiss();
@@ -260,7 +269,6 @@ public class CocaCola2_5L extends Activity {
 
         }
     }
-
 
 
 }

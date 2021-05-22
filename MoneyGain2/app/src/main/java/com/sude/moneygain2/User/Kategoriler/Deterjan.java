@@ -169,13 +169,6 @@ public class Deterjan extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(intent4);
                 break;
 
-            case R.id.nav_Et:
-
-                Intent intent5 = new Intent(getApplicationContext(), EtTavukBalik.class);
-                intent5.putExtra("username_email", username_email);
-                intent5.putExtra("pass", pass);
-                startActivity(intent5);
-                break;
 
             case R.id.nav_Sut:
 

@@ -68,7 +68,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/cola_2_5" />
+                        android:src="@drawable/no_profile_photo" />
 
 
                     <TextView
@@ -114,39 +114,30 @@
                         app:cardElevation="10dp">
 
                         <RelativeLayout
+                            android:id="@+id/kupon_relativelayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:id="@+id/kupon_img"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_centerHorizontal="true"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="10dp"
                                 android:src="@drawable/puan" />
-
-                            <TextView
-                                android:id="@+id/puan_label"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/bungee_regular"
-                                android:includeFontPadding="false"
-                                android:text="123"
-                                android:textColor="#FFFFFF"
-                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/puan_desc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/puan_label"
+                                android:layout_below="@id/kupon_img"
                                 android:layout_centerHorizontal="true"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="12dp"
                                 android:includeFontPadding="false"
-                                android:text="Çeklerim"
+                                android:text="KUPONLARIM"
                                 android:textColor="#FFFFFF"
-                                android:textSize="14sp" />
+                                android:textSize="20sp" />
 
 
                         </RelativeLayout>
@@ -160,7 +151,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -288,6 +278,20 @@
                         android:background="#FE2F2F"
                         android:text="KAYDET"
                         android:textColor="#ffff">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/sil_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:background="#f2f5f8"
+                        android:layout_marginLeft="270dp"
+                        android:layout_marginTop="20dp"
+                        android:text="HESABINI SİL"
+                        android:textColor="@color/black">
 
                     </androidx.appcompat.widget.AppCompatButton>
 

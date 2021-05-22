@@ -45,7 +45,6 @@ public class Login extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         signUp = findViewById(R.id.signup_button);
-        button_google = findViewById(R.id.button_google);
         button_giris = findViewById(R.id.button_giris);
         image = findViewById(R.id.logo_image);
         logoText = findViewById(R.id.logo_name);

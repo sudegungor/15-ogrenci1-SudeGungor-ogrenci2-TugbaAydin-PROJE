@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -21,12 +22,9 @@ import com.sude.moneygain2.Database.DatabaseHelper;
 import com.sude.moneygain2.R;
 import com.sude.moneygain2.User.Kategoriler.BebekOyuncak;
 import com.sude.moneygain2.User.Kategoriler.Deterjan;
-import com.sude.moneygain2.User.Kategoriler.EtTavukBalik;
 import com.sude.moneygain2.User.Kategoriler.GidaSekerleme;
 import com.sude.moneygain2.User.Kategoriler.Icecek;
 import com.sude.moneygain2.User.Kategoriler.SutKahvalti;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -42,13 +40,15 @@ public class Profil extends AppCompatActivity implements NavigationView.OnNaviga
 
     TextView full_name,yukari_nick;
 
+    RelativeLayout kupon_relativelayout;
+
     DatabaseHelper db;
 
     ArrayList<String> arrayList ;
 
     TextInputLayout profil_isim,profil_nick,profil_mail,profil_telno,profil_pass;
 
-    Button guncelle_btn,kaydet_btn;
+    Button guncelle_btn,kaydet_btn, sil_btn;
 
 
     @Override
@@ -66,16 +66,24 @@ public class Profil extends AppCompatActivity implements NavigationView.OnNaviga
         pass = intent.getStringExtra("pass");
 
 
-        System.out.println(username_email);
-
         profil_isim = findViewById(R.id.profil_isim);
         profil_nick = findViewById(R.id.profil_nick);
         profil_mail = findViewById(R.id.profil_mail);
         profil_telno = findViewById(R.id.profil_telno);
         profil_pass = findViewById(R.id.profil_pass);
 
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        menuIcon = findViewById(R.id.menu_icon);
+        contentView = findViewById(R.id.contentView);
+        guncelle_btn = findViewById(R.id.guncelle_btn);
+        kaydet_btn = findViewById(R.id.kaydet_btn);
+
         full_name = findViewById(R.id.full_name);
         yukari_nick = findViewById(R.id.yukari_nick);
+
+        kupon_relativelayout = findViewById(R.id.kupon_relativelayout);
+        sil_btn = findViewById(R.id.sil_btn);
 
 
         arrayList = db.getInfo(username_email,pass);
@@ -97,17 +105,21 @@ public class Profil extends AppCompatActivity implements NavigationView.OnNaviga
         profil_telno.setEnabled(false);
 
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        menuIcon = findViewById(R.id.menu_icon);
-        contentView = findViewById(R.id.contentView);
-        guncelle_btn = findViewById(R.id.guncelle_btn);
-        kaydet_btn = findViewById(R.id.kaydet_btn);
-
         kaydet_btn.setVisibility(View.GONE);
 
 
         navigationDrawer();
+
+
+        sil_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EminMisinizEkrani.class);
+                intent.putExtra("username_email", username_email);
+                intent.putExtra("pass", pass);
+                startActivity(intent);
+            }
+        });
 
 
         guncelle_btn.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +167,21 @@ public class Profil extends AppCompatActivity implements NavigationView.OnNaviga
 
             }
         });
+
+        kupon_relativelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), Kuponlar.class);
+                intent.putExtra("username_email", username_email);
+                intent.putExtra("pass", pass);
+                startActivity(intent);
+
+            }
+        });
+
+
+
 
     }
 
@@ -268,13 +295,7 @@ public class Profil extends AppCompatActivity implements NavigationView.OnNaviga
                 startActivity(intent4);
                 break;
 
-            case R.id.nav_Et:
 
-                Intent intent5 = new Intent(getApplicationContext(), EtTavukBalik.class);
-                intent5.putExtra("username_email", username_email);
-                intent5.putExtra("pass", pass);
-                startActivity(intent5);
-                break;
 
             case R.id.nav_Sut:
 

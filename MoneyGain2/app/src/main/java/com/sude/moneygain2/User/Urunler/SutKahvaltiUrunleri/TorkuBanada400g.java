@@ -38,9 +38,6 @@ public class TorkuBanada400g extends Activity {
     public ArrayList liste_isim = new ArrayList();
 
     public static ArrayList<Float> liste_float = new ArrayList();
-    public static ArrayList<String> tukendisiz_liste_isim = new ArrayList(); //tükendisiz isim listesi
-    public static ArrayList<String> tukendi_isim = new ArrayList(); //tükendisiz isim listesi
-
     private ProgressDialog progressDialog;
     private static String URL1 ="https://www.happycenter.com.tr/Torku_Banada_400_Gr";
     private static String URL2 ="https://www.a101.com.tr/market/torku-banada-kakaolu-findik-kremasi-400-g/";
@@ -88,6 +85,7 @@ public class TorkuBanada400g extends Activity {
 
             String deger = liste1.get(i);
             deger = deger.replaceAll(",", ".");
+            deger = deger.replaceAll(" ", "");
             liste_float.add(Float.parseFloat(deger));
 
         }
@@ -176,6 +174,11 @@ public class TorkuBanada400g extends Activity {
                 Document doc = Jsoup.connect(URL2).timeout(30*1000).get();
 
                 Elements fiyat = doc.select("div[class='price single']");
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='price new']");
+                }
+
                 liste_fiyat.add(fiyat.text());
 
                 liste_isim.add("Torku Banada 400 g || A101");
@@ -223,6 +226,11 @@ public class TorkuBanada400g extends Activity {
                 Document doc = Jsoup.connect(URL3).timeout(30*1000).get();
 
                 Elements fiyat = doc.select("span[itemprop='price']");
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='item-price js-variant-discounted-price']");
+                }
+
                 liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length()-3));
 
                 liste_isim.add("Torku Banada 400 g || CarrefourSA");

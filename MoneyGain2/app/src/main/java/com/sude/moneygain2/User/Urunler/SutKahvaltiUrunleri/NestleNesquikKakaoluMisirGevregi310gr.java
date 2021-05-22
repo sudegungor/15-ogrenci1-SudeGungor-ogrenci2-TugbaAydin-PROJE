@@ -38,8 +38,6 @@ public class NestleNesquikKakaoluMisirGevregi310gr extends Activity {
     public ArrayList liste_isim = new ArrayList();
 
     public static ArrayList<Float> liste_float = new ArrayList();
-    public static ArrayList<String> tukendisiz_liste_isim = new ArrayList(); //tükendisiz isim listesi
-    public static ArrayList<String> tukendi_isim = new ArrayList(); //tükendisiz isim listesi
 
     private ProgressDialog progressDialog;
     private static String URL1 = "https://www.happycenter.com.tr/Nesquik_310_Gr_Cokokare_Cikolatali_Gevrek";
@@ -86,6 +84,7 @@ public class NestleNesquikKakaoluMisirGevregi310gr extends Activity {
 
             String deger = liste1.get(i);
             deger = deger.replaceAll(",", ".");
+            deger = deger.replaceAll(" ", "");
             liste_float.add(Float.parseFloat(deger));
 
         }
@@ -171,6 +170,12 @@ public class NestleNesquikKakaoluMisirGevregi310gr extends Activity {
                 Document doc = Jsoup.connect(URL2).timeout(30 * 1000).get();
 
                 Elements fiyat = doc.select("div[class='price single']");
+
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='price new']");
+                }
+
                 liste_fiyat.add(fiyat.text());
 
                 liste_isim.add("Nestle Mısır Gevreği Çikolatalı 310 G || A101");
@@ -217,6 +222,11 @@ public class NestleNesquikKakaoluMisirGevregi310gr extends Activity {
                 Document doc = Jsoup.connect(URL3).timeout(30 * 1000).get();
 
                 Elements fiyat = doc.select("span[itemprop='price']");
+
+                if (fiyat.text().length()==0) {
+                    fiyat = doc.select("div[class='item-price js-variant-discounted-price']");
+                }
+
                 liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length() - 3));
 
                 liste_isim.add("Nestle Mısır Gevreği Çikolatalı 310 G || CarrefourSA");

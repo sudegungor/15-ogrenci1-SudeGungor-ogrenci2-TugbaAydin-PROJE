@@ -41,10 +41,6 @@
 
             <group android:checkableBehavior="single">
 
-                <item
-                    android:id="@+id/nav_Et"
-                    android:title="Et, Tavuk, Balık"
-                    android:icon="@drawable/meat"/>
 
                 <item
                     android:id="@+id/nav_Sut"

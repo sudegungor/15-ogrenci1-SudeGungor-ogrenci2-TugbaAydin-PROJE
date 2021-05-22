@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import com.sude.moneygain2.R;
 import com.sude.moneygain2.User.Kategoriler.BebekOyuncak;
 import com.sude.moneygain2.User.Kategoriler.Deterjan;
-import com.sude.moneygain2.User.Kategoriler.EtTavukBalik;
 import com.sude.moneygain2.User.Kategoriler.GidaSekerleme;
 import com.sude.moneygain2.User.Kategoriler.Icecek;
 import com.sude.moneygain2.User.Kategoriler.SutKahvalti;
@@ -20,7 +19,7 @@ import com.sude.moneygain2.User.Kategoriler.SutKahvalti;
 public class ButunKategoriler extends AppCompatActivity {
 
     ImageView backBtn;
-    RelativeLayout butun_kategoriler_et_tavuk,butun_kategoriler_sut_kahvaltı,butun_kategoriler_gida_sekerleme,butun_kategoriler_icecek,butun_kategoriler_deterjan,butun_kategoriler_bebek_oyuncak;
+    RelativeLayout butun_kategoriler_sut_kahvaltı,butun_kategoriler_gida_sekerleme,butun_kategoriler_icecek,butun_kategoriler_deterjan,butun_kategoriler_bebek_oyuncak;
     String username_email, pass;
 
 
@@ -32,7 +31,6 @@ public class ButunKategoriler extends AppCompatActivity {
 
 
         backBtn =findViewById(R.id.backBtn);
-        butun_kategoriler_et_tavuk = findViewById(R.id.butun_kategoriler_et_tavuk);
         butun_kategoriler_sut_kahvaltı = findViewById(R.id.butun_kategoriler_sut_kahvaltı);
         butun_kategoriler_gida_sekerleme = findViewById(R.id.butun_kategoriler_gida_sekerleme);
         butun_kategoriler_icecek = findViewById(R.id.butun_kategoriler_icecek);
@@ -52,18 +50,6 @@ public class ButunKategoriler extends AppCompatActivity {
             }
         });
 
-
-        butun_kategoriler_et_tavuk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), EtTavukBalik.class);
-                intent.putExtra("username_email", username_email);
-                intent.putExtra("pass", pass);
-                startActivity(intent);
-
-            }
-        });
 
 
         butun_kategoriler_sut_kahvaltı.setOnClickListener(new View.OnClickListener() {
