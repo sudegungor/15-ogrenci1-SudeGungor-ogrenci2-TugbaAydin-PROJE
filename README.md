@@ -1,4 +1,4 @@
-# Fiyat_Karsilastirma
+# Grup15-SudeGungor-TugbaAydin-PROJE
 Android Studio ile Market Fiyatları Karşılaştırma
 
 
