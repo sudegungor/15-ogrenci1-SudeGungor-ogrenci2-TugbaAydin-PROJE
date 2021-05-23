@@ -78,7 +78,7 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
         yukari_nick.setText(pass);
 
         full_name.setEnabled(false);
-        full_name.setEnabled(false);
+        yukari_nick.setEnabled(false);
 
 
 
@@ -87,15 +87,13 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
         kupon_arrayList = db.getKupon(username_email, pass);
 
 
-
-
-
-
         for (int i = 0; i < kupon_arrayList.size(); i++) {
 
             text_kupon.append(kupon_arrayList.get(i));
 
         }
+
+        text_kupon.setEnabled(false);
 
 
     }
