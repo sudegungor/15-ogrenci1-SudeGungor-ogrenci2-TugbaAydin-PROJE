@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.sude.moneygain.Database.DatabaseHelper;
@@ -41,6 +42,9 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
 
     ArrayList<String> kupon_arrayList ;
 
+    TextView full_name, yukari_nick;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,10 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
         text_kupon = findViewById(R.id.text_kupon);
+        full_name = findViewById(R.id.full_name);
+        yukari_nick = findViewById(R.id.yukari_nick);
+
+
 
         navigationDrawer();
 
@@ -66,10 +74,19 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
         username_email = intent.getStringExtra("username_email");
         pass = intent.getStringExtra("pass");
 
+        full_name.setText(username_email);
+        yukari_nick.setText(pass);
+
+        full_name.setEnabled(false);
+        full_name.setEnabled(false);
+
+
 
         kupon_arrayList = new ArrayList();
 
         kupon_arrayList = db.getKupon(username_email, pass);
+
+
 
 
 
