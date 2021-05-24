@@ -34,7 +34,7 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
     ImageView menuIcon;
     LinearLayout contentView;
-    String username_email, pass, text_yukari_nick;
+    String username_email, pass;
 
     DatabaseHelper db;
 
@@ -57,7 +57,6 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.contentView);
         text_kupon = findViewById(R.id.text_kupon);
-        full_name = findViewById(R.id.full_name);
         yukari_nick = findViewById(R.id.yukari_nick);
 
 
@@ -73,12 +72,9 @@ public class Kuponlar extends AppCompatActivity implements NavigationView.OnNavi
         Intent intent = getIntent();
         username_email = intent.getStringExtra("username_email");
         pass = intent.getStringExtra("pass");
-        text_yukari_nick = intent.getStringExtra("text_yukari_nick");
 
-        full_name.setText(username_email);
-        yukari_nick.setText(text_yukari_nick);
+        yukari_nick.setText(username_email);
 
-        full_name.setEnabled(false);
         yukari_nick.setEnabled(false);
 
 

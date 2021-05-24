@@ -40,7 +40,7 @@ public class CocaCola2_5L extends Activity {
 
     private ProgressDialog progressDialog;
     private static String URL1 = "https://www.happycenter.com.tr/Coca_Cola_2_5_Lt_Pet";
-    private static String URL2 = "https://www.a101.com.tr/market/coca-cola-gazli-icecek-sekersiz-2-5-l/";
+    private static String URL2 = "https://www.a101.com.tr/market/coca-cola-gazli-icecek-kola-2-5-l/?recommended_by=instant_search&personaclick_search_query=coca%20cola";
     private static String URL3 = "https://www.carrefoursa.com/coca-cola-2-5-l-p-30039137";
 
     @Override
@@ -178,7 +178,7 @@ public class CocaCola2_5L extends Activity {
                     fiyat = doc.select("div[class='price new']");
                 }
 
-                liste_fiyat.add(fiyat.text());
+                liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length() - 4));
                 liste_isim.add("Coca Cola 2,5L || A101");
 
 

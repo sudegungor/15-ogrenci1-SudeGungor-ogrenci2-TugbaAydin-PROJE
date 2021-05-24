@@ -71,29 +71,19 @@
                         android:src="@drawable/no_profile_photo" />
 
 
-                    <TextView
-                        android:id="@+id/full_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/profil_foto"
-                        android:fontFamily="@font/bungee_regular"
-                        android:includeFontPadding="false"
-                        android:text="Sude Güngör"
-                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/yukari_nick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/full_name"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="50dp"
                         android:layout_toRightOf="@+id/profil_foto"
                         android:includeFontPadding="false"
                         android:text="sudegungor"
-                        android:textSize="14sp" />
+                        android:textSize="20sp"
+                        android:textColor="@color/black"/>
 
 
                 </RelativeLayout>
@@ -158,7 +148,8 @@
                         android:id="@+id/text_kupon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"/>
+                        android:background="@color/white"
+                        android:textColor="@color/black"/>
 
 
                 </LinearLayout>
