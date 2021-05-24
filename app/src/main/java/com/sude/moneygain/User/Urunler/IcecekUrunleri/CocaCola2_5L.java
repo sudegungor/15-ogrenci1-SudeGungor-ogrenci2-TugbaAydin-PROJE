@@ -178,7 +178,7 @@ public class CocaCola2_5L extends Activity {
                     fiyat = doc.select("div[class='price new']");
                 }
 
-                liste_fiyat.add(fiyat.text().substring(0, fiyat.text().length() - 4));
+                liste_fiyat.add(fiyat.text());
                 liste_isim.add("Coca Cola 2,5L || A101");
 
 
